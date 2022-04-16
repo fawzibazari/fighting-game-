@@ -30,5 +30,5 @@ export interface Characteristics {
     height?: number;
   };
   image: HTMLImageElement;
-  imageSrc: string;
+  imageSrc: any;
 }

@@ -29,7 +29,7 @@ export class canvas implements Characteristics {
     height: number;
   };
   image: HTMLImageElement;
-  imageSrc?: string;
+  imageSrc: string;
 
   constructor({
     position,
@@ -55,22 +55,9 @@ export class canvas implements Characteristics {
     this.color = color;
     this.isAttacking;
     this.health = 100;
+    this.imageSrc = '';
     this.image = new Image();
     this.image.src = imageSrc;
-  }
-
-  draw() {
-    c.drawImage(
-      this.image,
-      this.framesCurrent * (this.image.width / this.framesMax),
-      0,
-      this.image.width / this.framesMax,
-      this.image.height,
-      this.position.x - this.offset.x,
-      this.position.y - this.offset.y,
-      (this.image.width / this.framesMax) * this.scale,
-      this.image.height * this.scale,
-    );
   }
 }
 const test = new canvas({
