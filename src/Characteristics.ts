@@ -13,7 +13,7 @@ export interface Characteristics {
     x: number;
     y: number;
   };
-  offset?: {
+  offset: {
     x: number;
     y: number;
   };
@@ -31,4 +31,9 @@ export interface Characteristics {
   };
   image: HTMLImageElement;
   imageSrc: any;
+  framesMax: number;
+  framesCurrent: number;
+  framesElapsed: number;
+  framesHold: number;
+  scale: number;
 }
