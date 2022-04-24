@@ -1,7 +1,35 @@
-import { c, canvas } from '.';
-import { Characteristics } from './Characteristics';
+import { c, canvas } from './index';
 
 const gravity = 0.7;
+
+export class Scene {
+  width: number;
+  height: number;
+  position: {
+    x: number;
+    y: number;
+  };
+  image: HTMLImageElement;
+
+  constructor({ position, imageSrc }: any) {
+    this.position = position;
+    this.width = 50;
+    this.height = 150;
+    this.image = new Image();
+    this.image.src = imageSrc;
+  }
+
+  draw() {
+    c.drawImage(this.image, this.position.x, this.position.y);
+  }
+
+  update() {
+    console.log(this.image);
+
+    this.draw();
+  }
+}
+
 export class Player {
   width: number;
   height: number;
@@ -30,7 +58,7 @@ export class Player {
     width: number;
     height: number;
   };
-  constructor({ position, velocity, color = 'red', offset }: any) {
+  constructor({ position, velocity, color, offset }: any) {
     this.position = position;
     this.velocity = velocity;
     this.width = 50;
@@ -45,6 +73,7 @@ export class Player {
       width: 100,
       height: 50,
     };
+    offset;
     this.color = color;
     this.isAttacking;
     this.health = 100;
@@ -56,7 +85,7 @@ export class Player {
 
     // attack box
     if (this.isAttacking) {
-      c.fillStyle = 'green';
+      c.fillStyle = 'white';
       c.fillRect(
         this.attackBox.position.x,
         this.attackBox.position.y,
