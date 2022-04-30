@@ -30,7 +30,6 @@ export interface Characteristics {
     height?: number;
   };
   image: HTMLImageElement;
-  imageSrc: any;
   framesMax: number;
   framesCurrent: number;
   framesElapsed: number;

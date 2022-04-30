@@ -13,7 +13,7 @@ const background = new Scene({
     x: 0,
     y: 0,
   },
-  imageSrc: './images/konoha.png',
+  imageSrc: './images/background.png',
 });
 
 const player = new Player({
@@ -117,8 +117,6 @@ function decreaseTimer() {
 decreaseTimer();
 
 //animation loop
-console.log(background.image);
-
 function animate() {
   window.requestAnimationFrame(animate);
   //background color

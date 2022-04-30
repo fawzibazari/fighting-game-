@@ -10,13 +10,17 @@ export class Scene {
     y: number;
   };
   image: HTMLImageElement;
+  scale: number;
+  maxFrame?: number;
+  framesCurrent: number;
 
-  constructor({ position, imageSrc }: any) {
+  constructor({ position, imageSrc, scale = 1, maxFrame = 1 }: any) {
     this.position = position;
     this.width = 50;
     this.height = 150;
     this.image = new Image();
     this.image.src = imageSrc;
+    this.scale = scale;
   }
 
   draw() {
@@ -24,19 +28,13 @@ export class Scene {
   }
 
   update() {
-    console.log(this.image);
-
     this.draw();
   }
 }
 
-export class Player {
+export class Player extends Scene {
   width: number;
   height: number;
-  position: {
-    x: number;
-    y: number;
-  };
   velocity: { x: number; y: number };
   lastKey!: string;
   color: string;
@@ -58,8 +56,22 @@ export class Player {
     width: number;
     height: number;
   };
-  constructor({ position, velocity, color, offset }: any) {
-    this.position = position;
+  constructor({
+    position,
+    velocity,
+    color,
+    imageSrc,
+    scale = 1,
+    framesMax = 1,
+    offset,
+  }: any) {
+    super({
+      position,
+      imageSrc,
+      scale,
+      framesMax,
+      offset,
+    });
     this.velocity = velocity;
     this.width = 50;
     this.height = 150;
@@ -77,6 +89,9 @@ export class Player {
     this.color = color;
     this.isAttacking;
     this.health = 100;
+    this.framesCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 5;
   }
 
   draw() {
