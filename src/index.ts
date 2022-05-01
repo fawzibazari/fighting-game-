@@ -35,11 +35,26 @@ const player = new Player({
     x: 0,
     y: 0,
   },
-  color: 'pink',
-
   offset: {
-    x: 0,
-    y: 0,
+    x: 110,
+    y: 133,
+  },
+  imageSrc: './images/wizard/Idle.png',
+  maxFrame: 6,
+  scale: 2,
+  sprites: {
+    idle: {
+      imageSrc: './images/wizard/Idle.png',
+      maxFrame: 6,
+    },
+    run: {
+      imageSrc: './images/wizard/Run.png',
+      maxFrame: 8,
+    },
+    jump: {
+      imageSrc: './images/wizard/Jump.png',
+      maxFrame: 8,
+    },
   },
 });
 
@@ -135,16 +150,22 @@ function animate() {
   background.update();
   blueFlame.update();
   player.update();
-  enemy.update();
+  // enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
   // player movement
+  player.image = player.sprites.idle.image;
+  player.maxFrame = player.sprites.idle.maxFrame;
   if (keys.a.pressed && player.lastKey === 'a') {
     player.velocity.x = -5;
+    player.image = player.sprites.run.image;
+    player.maxFrame = player.sprites.run.maxFrame;
   } else if (keys.d.pressed && player.lastKey === 'd') {
     player.velocity.x = 5;
+    player.image = player.sprites.run.image;
+    player.maxFrame = player.sprites.run.maxFrame;
   }
 
   // Enemy movement

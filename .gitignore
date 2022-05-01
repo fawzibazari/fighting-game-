@@ -6,7 +6,8 @@
 /tmp
 /out-tsc
 /node_modules
-.cache
+/.cache
+.cache/
 
 # Only exists if Bazel was run
 /bazel-out
