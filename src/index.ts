@@ -16,6 +16,16 @@ const background = new Scene({
   imageSrc: './images/background.png',
 });
 
+const blueFlame = new Scene({
+  position: {
+    x: 970,
+    y: 380,
+  },
+  imageSrc: './images/burning_loop.png',
+  scale: 5,
+  maxFrame: 8,
+});
+
 const player = new Player({
   position: {
     x: 0,
@@ -123,6 +133,7 @@ function animate() {
   c.fillStyle = 'black';
   c.fillRect(0, 0, canvas.width, canvas.height);
   background.update();
+  blueFlame.update();
   player.update();
   enemy.update();
 

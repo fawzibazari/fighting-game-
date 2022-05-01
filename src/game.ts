@@ -11,8 +11,12 @@ export class Scene {
   };
   image: HTMLImageElement;
   scale: number;
-  maxFrame?: number;
-  framesCurrent: number;
+  maxFrame: number;
+  currentFrame: number;
+  // to know how many frames i have elapsed
+  elapsedFrame: number;
+  //for how many frames i have to make the animation example: for every 5 frames i make the animation
+  framesHold: number;
 
   constructor({ position, imageSrc, scale = 1, maxFrame = 1 }: any) {
     this.position = position;
@@ -21,14 +25,36 @@ export class Scene {
     this.image = new Image();
     this.image.src = imageSrc;
     this.scale = scale;
+    this.maxFrame = maxFrame;
+    this.currentFrame = 0;
+    this.elapsedFrame = 0;
+    this.framesHold = 5;
   }
 
   draw() {
-    c.drawImage(this.image, this.position.x, this.position.y);
+    c.drawImage(
+      this.image,
+      this.currentFrame * (this.image.width / this.maxFrame),
+      0,
+      this.image.width / this.maxFrame,
+      this.image.height,
+      this.position.x,
+      this.position.y,
+      (this.image.width / this.maxFrame) * this.scale,
+      this.image.height * this.scale,
+    );
   }
 
   update() {
     this.draw();
+    this.elapsedFrame++;
+    if (this.elapsedFrame % this.framesHold === 0) {
+      if (this.currentFrame < this.maxFrame - 1) {
+        this.currentFrame++;
+      } else {
+        this.currentFrame = 0;
+      }
+    }
   }
 }
 
@@ -89,9 +115,6 @@ export class Player extends Scene {
     this.color = color;
     this.isAttacking;
     this.health = 100;
-    this.framesCurrent = 0;
-    this.framesElapsed = 0;
-    this.framesHold = 5;
   }
 
   draw() {
