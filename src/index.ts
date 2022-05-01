@@ -53,7 +53,7 @@ const player = new Player({
     },
     jump: {
       imageSrc: './images/wizard/Jump.png',
-      maxFrame: 8,
+      maxFrame: 2,
     },
   },
 });
@@ -78,7 +78,7 @@ const keys = {
   a: {
     pressed: false,
   },
-  d: {
+  z: {
     pressed: false,
   },
   ArrowRight: {
@@ -162,10 +162,15 @@ function animate() {
     player.velocity.x = -5;
     player.image = player.sprites.run.image;
     player.maxFrame = player.sprites.run.maxFrame;
-  } else if (keys.d.pressed && player.lastKey === 'd') {
+  } else if (keys.z.pressed && player.lastKey === 'z') {
     player.velocity.x = 5;
     player.image = player.sprites.run.image;
     player.maxFrame = player.sprites.run.maxFrame;
+  }
+
+  if (player.velocity.y < 0) {
+    player.image = player.sprites.jump.image;
+    player.maxFrame = player.sprites.jump.maxFrame;
   }
 
   // Enemy movement
@@ -214,16 +219,16 @@ animate();
 
 window.addEventListener('keydown', (event) => {
   switch (event.key) {
-    case 'd':
-      keys.d.pressed = true;
-      player.lastKey = 'd';
+    case 'z':
+      keys.z.pressed = true;
+      player.lastKey = 'z';
       break;
     case 'a':
       keys.a.pressed = true;
       player.lastKey = 'a';
       break;
-    case 'w':
-      player.velocity.y = -20;
+    case 'e':
+      player.velocity.y = -30;
       break;
     case ' ':
       player.attack();
@@ -248,8 +253,8 @@ window.addEventListener('keydown', (event) => {
 
 window.addEventListener('keyup', (event) => {
   switch (event.key) {
-    case 'd':
-      keys.d.pressed = false;
+    case 'z':
+      keys.z.pressed = false;
       break;
     case 'a':
       keys.a.pressed = false;
