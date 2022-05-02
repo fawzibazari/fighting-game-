@@ -156,16 +156,13 @@ function animate() {
   enemy.velocity.x = 0;
 
   // player movement
-  player.image = player.sprites.idle.image;
-  player.maxFrame = player.sprites.idle.maxFrame;
+  player.animationSwitcher('idle');
   if (keys.a.pressed && player.lastKey === 'a') {
     player.velocity.x = -5;
-    player.image = player.sprites.run.image;
-    player.maxFrame = player.sprites.run.maxFrame;
+    player.animationSwitcher('run');
   } else if (keys.z.pressed && player.lastKey === 'z') {
     player.velocity.x = 5;
-    player.image = player.sprites.run.image;
-    player.maxFrame = player.sprites.run.maxFrame;
+    player.animationSwitcher('run');
   }
 
   if (player.velocity.y < 0) {

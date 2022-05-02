@@ -164,4 +164,29 @@ export class Player extends Scene {
       this.isAttacking = false;
     }, 100);
   }
+
+  //the Sprites
+  animationSwitcher(animation: string) {
+    // the if statement is to set the value the firstime only
+    switch (animation) {
+      case 'idle':
+        if (this.image !== this.sprites.idle.image) {
+          this.image = this.sprites.idle.image;
+          this.maxFrame = this.sprites.idle.maxFrame;
+        }
+        break;
+      case 'run':
+        if (this.image !== this.sprites.run.image) {
+          this.image = this.sprites.run.image;
+          this.maxFrame = this.sprites.run.maxFrame;
+        }
+        break;
+      case 'jump':
+        if (this.image !== this.sprites.jump.image) {
+          this.image = this.sprites.jump.image;
+          this.maxFrame = this.sprites.jump.maxFrame;
+        }
+        break;
+    }
+  }
 }
