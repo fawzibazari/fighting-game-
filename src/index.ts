@@ -55,6 +55,10 @@ const player = new Player({
       imageSrc: './images/wizard/Jump.png',
       maxFrame: 2,
     },
+    fall: {
+      imageSrc: './images/wizard/Fall.png',
+      maxFrame: 2,
+    },
   },
 });
 
@@ -156,18 +160,21 @@ function animate() {
   enemy.velocity.x = 0;
 
   // player movement
-  player.animationSwitcher('idle');
   if (keys.a.pressed && player.lastKey === 'a') {
     player.velocity.x = -5;
     player.animationSwitcher('run');
   } else if (keys.z.pressed && player.lastKey === 'z') {
     player.velocity.x = 5;
     player.animationSwitcher('run');
+  } else {
+    player.animationSwitcher('idle');
   }
 
+  //jump and fall
   if (player.velocity.y < 0) {
-    player.image = player.sprites.jump.image;
-    player.maxFrame = player.sprites.jump.maxFrame;
+    player.animationSwitcher('jump');
+  } else if (player.velocity.y > 0) {
+    player.animationSwitcher('fall');
   }
 
   // Enemy movement

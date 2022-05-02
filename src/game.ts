@@ -155,6 +155,7 @@ export class Player extends Scene {
 
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
       this.velocity.y = 0;
+      this.position.y = 630;
     } else this.velocity.y += gravity;
   }
 
@@ -173,18 +174,28 @@ export class Player extends Scene {
         if (this.image !== this.sprites.idle.image) {
           this.image = this.sprites.idle.image;
           this.maxFrame = this.sprites.idle.maxFrame;
+          this.currentFrame = 0;
         }
         break;
       case 'run':
         if (this.image !== this.sprites.run.image) {
           this.image = this.sprites.run.image;
           this.maxFrame = this.sprites.run.maxFrame;
+          this.currentFrame = 0;
         }
         break;
       case 'jump':
         if (this.image !== this.sprites.jump.image) {
           this.image = this.sprites.jump.image;
           this.maxFrame = this.sprites.jump.maxFrame;
+          this.currentFrame = 0;
+        }
+        break;
+      case 'fall':
+        if (this.image !== this.sprites.fall.image) {
+          this.image = this.sprites.fall.image;
+          this.maxFrame = this.sprites.fall.maxFrame;
+          this.currentFrame = 0;
         }
         break;
     }
