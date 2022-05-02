@@ -81,8 +81,37 @@ const enemy = new Player({
   },
   color: 'cadetblue',
   offset: {
-    x: -50,
-    y: 0,
+    x: 130,
+    y: 235,
+  },
+  imageSrc: './images/kenji/Idle.png',
+  maxFrame: 4,
+  scale: 3,
+  sprites: {
+    idle: {
+      imageSrc: './images/kenji/Idle.png',
+      maxFrame: 4,
+    },
+    run: {
+      imageSrc: './images/kenji/Run.png',
+      maxFrame: 8,
+    },
+    jump: {
+      imageSrc: './images/kenji/Jump.png',
+      maxFrame: 2,
+    },
+    fall: {
+      imageSrc: './images/kenji/Fall.png',
+      maxFrame: 2,
+    },
+    attack1: {
+      imageSrc: './images/kenji/Attack1.png',
+      maxFrame: 4,
+    },
+    attack2: {
+      imageSrc: './images/kenji/Attack1.png',
+      maxFrame: 4,
+    },
   },
 });
 
@@ -165,7 +194,7 @@ function animate() {
   background.update();
   blueFlame.update();
   player.update();
-  // enemy.update();
+  enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
@@ -191,8 +220,19 @@ function animate() {
   // Enemy movement
   if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
     enemy.velocity.x = -5;
+    enemy.animationSwitcher('run');
   } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
     enemy.velocity.x = 5;
+    enemy.animationSwitcher('run');
+  } else {
+    enemy.animationSwitcher('idle');
+  }
+
+  //enemy jump and fall
+  if (enemy.velocity.y < 0) {
+    enemy.animationSwitcher('jump');
+  } else if (player.velocity.y > 0) {
+    enemy.animationSwitcher('fall');
   }
 
   // detect for collision
@@ -252,6 +292,10 @@ window.addEventListener('keydown', (event) => {
       keys.s.pressed = true;
       player.lastKey = 's';
       player.attack2();
+      enemy.health -= 100;
+      ((document.querySelector(
+        '#enemyHealth',
+      ) as unknown) as HTMLElement).style.width = enemy.health + '%';
       break;
 
     case 'ArrowRight':
