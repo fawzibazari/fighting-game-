@@ -59,6 +59,10 @@ const player = new Player({
       imageSrc: './images/wizard/Fall.png',
       maxFrame: 2,
     },
+    attack1: {
+      imageSrc: './images/wizard/Attack1.png',
+      maxFrame: 8,
+    },
   },
 });
 
