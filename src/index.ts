@@ -231,7 +231,7 @@ function animate() {
   //enemy jump and fall
   if (enemy.velocity.y < 0) {
     enemy.animationSwitcher('jump');
-  } else if (player.velocity.y > 0) {
+  } else if (enemy.velocity.y > 0) {
     enemy.animationSwitcher('fall');
   }
 
@@ -296,6 +296,11 @@ window.addEventListener('keydown', (event) => {
       ((document.querySelector(
         '#enemyHealth',
       ) as unknown) as HTMLElement).style.width = enemy.health + '%';
+      player.scale = 3;
+      player.offset = {
+        x: 110,
+        y: 270,
+      };
       break;
 
     case 'ArrowRight':
