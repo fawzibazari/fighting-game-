@@ -63,6 +63,10 @@ const player = new Player({
       imageSrc: './images/wizard/Attack1.png',
       maxFrame: 8,
     },
+    attack2: {
+      imageSrc: './images/wizard/Attack2.png',
+      maxFrame: 8,
+    },
   },
 });
 
@@ -87,6 +91,9 @@ const keys = {
     pressed: false,
   },
   z: {
+    pressed: false,
+  },
+  s: {
     pressed: false,
   },
   ArrowRight: {
@@ -240,6 +247,11 @@ window.addEventListener('keydown', (event) => {
       break;
     case ' ':
       player.attack();
+      break;
+    case 's':
+      keys.s.pressed = true;
+      player.lastKey = 's';
+      player.attack2();
       break;
 
     case 'ArrowRight':

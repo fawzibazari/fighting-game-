@@ -166,6 +166,13 @@ export class Player extends Scene {
       this.isAttacking = false;
     }, 100);
   }
+  attack2() {
+    this.animationSwitcher('attack2');
+    this.isAttacking = true;
+    setTimeout(() => {
+      this.isAttacking = false;
+    }, 100);
+  }
 
   //the Sprites
   animationSwitcher(animation: string) {
@@ -174,6 +181,12 @@ export class Player extends Scene {
       this.image === this.sprites.attack1.image &&
       //by doing that i check if all the frames of the attack are done and then i will switch
       this.currentFrame < this.sprites.attack1.maxFrame - 1
+    )
+      return;
+    if (
+      this.image === this.sprites.attack2.image &&
+      //by doing that i check if all the frames of the attack are done and then i will switch
+      this.currentFrame < this.sprites.attack2.maxFrame - 1
     )
       return;
     // the if statement is to set the value the firstime only
@@ -210,6 +223,13 @@ export class Player extends Scene {
         if (this.image !== this.sprites.attack1.image) {
           this.image = this.sprites.attack1.image;
           this.maxFrame = this.sprites.attack1.maxFrame;
+          this.currentFrame = 0;
+        }
+        break;
+      case 'attack2':
+        if (this.image !== this.sprites.attack2.image) {
+          this.image = this.sprites.attack2.image;
+          this.maxFrame = this.sprites.attack2.maxFrame;
           this.currentFrame = 0;
         }
         break;
