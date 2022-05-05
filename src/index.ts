@@ -148,21 +148,21 @@ function rectangularCollision({ rectangle1, rectangle2 }: any | number) {
 
 function determineWinner({ player, enemy, timerId }: any) {
   clearTimeout(timerId);
-  ((document.querySelector(
-    '#displayText',
-  ) as unknown) as HTMLElement).style.display = 'flex';
+  (
+    document.querySelector('#displayText') as unknown as HTMLElement
+  ).style.display = 'flex';
   if (player.health === enemy.health) {
-    ((document.querySelector(
-      '#displayText',
-    ) as unknown) as HTMLElement).innerHTML = 'Tie';
+    (
+      document.querySelector('#displayText') as unknown as HTMLElement
+    ).innerHTML = 'Tie';
   } else if (player.health > enemy.health) {
-    ((document.querySelector(
-      '#displayText',
-    ) as unknown) as HTMLElement).innerHTML = 'Player 1 Wins';
+    (
+      document.querySelector('#displayText') as unknown as HTMLElement
+    ).innerHTML = 'Player 1 Wins';
   } else if (player.health < enemy.health) {
-    ((document.querySelector(
-      '#displayText',
-    ) as unknown) as HTMLElement).innerHTML = 'Player 2 Wins';
+    (
+      document.querySelector('#displayText') as unknown as HTMLElement
+    ).innerHTML = 'Player 2 Wins';
   }
 }
 
@@ -173,9 +173,8 @@ function decreaseTimer() {
     timerId = setTimeout(decreaseTimer, 1000);
     timer--;
 
-    ((document.querySelector(
-      '#timer',
-    ) as unknown) as HTMLElement).innerHTML = timer.toString();
+    (document.querySelector('#timer') as unknown as HTMLElement).innerHTML =
+      timer.toString();
   }
 
   if (timer === 0) {
@@ -245,9 +244,9 @@ function animate() {
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
-    ((document.querySelector(
-      '#enemyHealth',
-    ) as unknown) as HTMLElement).style.width = enemy.health + '%';
+    (
+      document.querySelector('#enemyHealth') as unknown as HTMLElement
+    ).style.width = enemy.health + '%';
   }
 
   if (
@@ -259,9 +258,9 @@ function animate() {
   ) {
     enemy.isAttacking = false;
     player.health -= 20;
-    ((document.querySelector(
-      '#playerHealth',
-    ) as unknown) as HTMLElement).style.width = player.health + '%';
+    (
+      document.querySelector('#playerHealth') as unknown as HTMLElement
+    ).style.width = player.health + '%';
   }
 
   // end game based on health
@@ -293,9 +292,9 @@ window.addEventListener('keydown', (event) => {
       player.lastKey = 's';
       player.attack2();
       enemy.health -= 100;
-      ((document.querySelector(
-        '#enemyHealth',
-      ) as unknown) as HTMLElement).style.width = enemy.health + '%';
+      (
+        document.querySelector('#enemyHealth') as unknown as HTMLElement
+      ).style.width = enemy.health + '%';
       player.scale = 3;
       player.offset = {
         x: 110,

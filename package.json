@@ -4,17 +4,17 @@
   "description": "",
   "main": "index.js",
   "author": "fawzibazari <fawzi.bazari2@gmail.com>",
-
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel serve src/index.html",
+    "start": "parcel serve src/index.html && copyfiles src/images/* dist/images",
     "watch": "parcel watch src/index.html"
   },
   "license": "ISC",

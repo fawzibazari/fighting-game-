@@ -108,6 +108,7 @@ export class Player extends Scene {
     maxFrame = 1,
     offset = { x: 0, y: 0 },
     sprites,
+    attackBox = { offset: {}, width: undefined, height: undefined },
   }: any) {
     super({
       position,
