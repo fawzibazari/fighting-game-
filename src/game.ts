@@ -126,11 +126,10 @@ export class Player extends Scene {
         x: this.position.x,
         y: this.position.y,
       },
-      offset,
-      width: 100,
-      height: 50,
+      offset: attackBox.offset,
+      width: attackBox.width,
+      height: attackBox.height,
     };
-    offset;
     this.color = color;
     this.isAttacking;
     this.health = 100;
