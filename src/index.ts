@@ -68,6 +68,14 @@ const player = new Player({
       maxFrame: 8,
     },
   },
+  attackBox: {
+    offset: {
+      x: 0,
+      y: 0,
+    },
+    width: 100,
+    height: 50,
+  },
 });
 
 const enemy = new Player({
