@@ -36,8 +36,8 @@ const player = new Player({
     y: 0,
   },
   offset: {
-    x: 110,
-    y: 133,
+    x: 100,
+    y: 130,
   },
   imageSrc: './images/wizard/Idle.png',
   maxFrame: 6,
@@ -67,11 +67,15 @@ const player = new Player({
       imageSrc: './images/wizard/Attack2.png',
       maxFrame: 8,
     },
+    Hit: {
+      imageSrc: './images/wizard/Hit.png',
+      maxFrame: 4,
+    },
   },
   attackBox: {
     offset: {
-      x: 0,
-      y: 0,
+      x: 50,
+      y: 50,
     },
     width: 100,
     height: 50,
@@ -120,6 +124,18 @@ const enemy = new Player({
       imageSrc: './images/kenji/Attack1.png',
       maxFrame: 4,
     },
+    Hit: {
+      imageSrc: './images/kenji/Take hit.png',
+      maxFrame: 3,
+    },
+  },
+  attackBox: {
+    offset: {
+      x: -150,
+      y: 50,
+    },
+    width: 160,
+    height: 50,
   },
 });
 
@@ -248,7 +264,8 @@ function animate() {
       rectangle1: player,
       rectangle2: enemy,
     }) &&
-    player.isAttacking
+    player.isAttacking &&
+    player.currentFrame === 4
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
@@ -257,18 +274,27 @@ function animate() {
     ).style.width = enemy.health + '%';
   }
 
+  if (player.isAttacking && player.currentFrame === 4) {
+    player.isAttacking = false;
+  }
+
   if (
     rectangularCollision({
       rectangle1: enemy,
       rectangle2: player,
     }) &&
-    enemy.isAttacking
+    enemy.isAttacking &&
+    enemy.currentFrame === 2
   ) {
     enemy.isAttacking = false;
     player.health -= 20;
     (
       document.querySelector('#playerHealth') as unknown as HTMLElement
     ).style.width = player.health + '%';
+  }
+
+  if (enemy.isAttacking && enemy.currentFrame === 2) {
+    enemy.isAttacking = false;
   }
 
   // end game based on health
