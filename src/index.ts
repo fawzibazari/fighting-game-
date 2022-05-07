@@ -1,7 +1,19 @@
 import { Player, Scene } from './game';
+import emoji from 'node-emoji';
 
 export const canvas = document.querySelector('canvas')!;
 export const c = canvas.getContext('2d')!;
+console.log(
+  'Yo every one if you see this that mean i finally finished my game',
+);
+console.log('Here you will have a tutorial for how you can move the players :');
+console.log('player1 = A Z E and SPACE');
+console.log('player2 = ArrowLeft ArrowLeft ArrowRight ArrowUp ArrowDown');
+console.log(
+  'i left a small easter egg for you to discover i hope you find it 😉',
+);
+console.log('Follow me at https://github.com/fawzibazari');
+console.log('Peace ' + emoji.get('peace_symbol'));
 
 canvas.width = 1420;
 canvas.height = 780;
@@ -36,8 +48,8 @@ const player = new Player({
     y: 0,
   },
   offset: {
-    x: 110,
-    y: 133,
+    x: 100,
+    y: 130,
   },
   imageSrc: './images/wizard/Idle.png',
   maxFrame: 6,
@@ -67,6 +79,18 @@ const player = new Player({
       imageSrc: './images/wizard/Attack2.png',
       maxFrame: 8,
     },
+    Hit: {
+      imageSrc: './images/wizard/Hit.png',
+      maxFrame: 4,
+    },
+  },
+  attackBox: {
+    offset: {
+      x: 50,
+      y: 50,
+    },
+    width: 100,
+    height: 50,
   },
 });
 
@@ -112,6 +136,18 @@ const enemy = new Player({
       imageSrc: './images/kenji/Attack1.png',
       maxFrame: 4,
     },
+    Hit: {
+      imageSrc: './images/kenji/Take hit.png',
+      maxFrame: 3,
+    },
+  },
+  attackBox: {
+    offset: {
+      x: -150,
+      y: 50,
+    },
+    width: 160,
+    height: 50,
   },
 });
 
@@ -154,15 +190,18 @@ function determineWinner({ player, enemy, timerId }: any) {
   if (player.health === enemy.health) {
     (
       document.querySelector('#displayText') as unknown as HTMLElement
-    ).innerHTML = 'Tie';
+    ).innerHTML =
+      '<p style="color: black; font-family: Koulen, cursive; font-size: 71px; text-align: center">Tie</p>';
   } else if (player.health > enemy.health) {
     (
       document.querySelector('#displayText') as unknown as HTMLElement
-    ).innerHTML = 'Player 1 Wins';
+    ).innerHTML =
+      '<p style="color: black; font-family: Koulen, cursive; font-size: 71px; text-align: center">Player 1 Wins</p>';
   } else if (player.health < enemy.health) {
     (
       document.querySelector('#displayText') as unknown as HTMLElement
-    ).innerHTML = 'Player 2 Wins';
+    ).innerHTML =
+      '<p style="color: black; font-family: Koulen, cursive; font-size: 71px; text-align: center">Player 2 Wins</p>';
   }
 }
 
@@ -240,7 +279,8 @@ function animate() {
       rectangle1: player,
       rectangle2: enemy,
     }) &&
-    player.isAttacking
+    player.isAttacking &&
+    player.currentFrame === 4
   ) {
     player.isAttacking = false;
     enemy.health -= 20;
@@ -249,18 +289,27 @@ function animate() {
     ).style.width = enemy.health + '%';
   }
 
+  if (player.isAttacking && player.currentFrame === 4) {
+    player.isAttacking = false;
+  }
+
   if (
     rectangularCollision({
       rectangle1: enemy,
       rectangle2: player,
     }) &&
-    enemy.isAttacking
+    enemy.isAttacking &&
+    enemy.currentFrame === 2
   ) {
     enemy.isAttacking = false;
     player.health -= 20;
     (
       document.querySelector('#playerHealth') as unknown as HTMLElement
     ).style.width = player.health + '%';
+  }
+
+  if (enemy.isAttacking && enemy.currentFrame === 2) {
+    enemy.isAttacking = false;
   }
 
   // end game based on health
