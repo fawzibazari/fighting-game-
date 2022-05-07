@@ -1,7 +1,19 @@
 import { Player, Scene } from './game';
+import emoji from 'node-emoji';
 
 export const canvas = document.querySelector('canvas')!;
 export const c = canvas.getContext('2d')!;
+console.log(
+  'Yo every one if you see this that mean i finally finished my game',
+);
+console.log('Here you will have a tutorial for how you can move the players :');
+console.log('player1 = A Z E and SPACE');
+console.log('player2 = ArrowLeft ArrowLeft ArrowRight ArrowUp ArrowDown');
+console.log(
+  'i left a small easter egg for you to discover i hope you find it 😉',
+);
+console.log('Follow me at https://github.com/fawzibazari');
+console.log('Peace ' + emoji.get('peace_symbol'));
 
 canvas.width = 1420;
 canvas.height = 780;
@@ -178,15 +190,18 @@ function determineWinner({ player, enemy, timerId }: any) {
   if (player.health === enemy.health) {
     (
       document.querySelector('#displayText') as unknown as HTMLElement
-    ).innerHTML = 'Tie';
+    ).innerHTML =
+      '<p style="color: black; font-family: Koulen, cursive; font-size: 71px; text-align: center">Tie</p>';
   } else if (player.health > enemy.health) {
     (
       document.querySelector('#displayText') as unknown as HTMLElement
-    ).innerHTML = 'Player 1 Wins';
+    ).innerHTML =
+      '<p style="color: black; font-family: Koulen, cursive; font-size: 71px; text-align: center">Player 1 Wins</p>';
   } else if (player.health < enemy.health) {
     (
       document.querySelector('#displayText') as unknown as HTMLElement
-    ).innerHTML = 'Player 2 Wins';
+    ).innerHTML =
+      '<p style="color: black; font-family: Koulen, cursive; font-size: 71px; text-align: center">Player 2 Wins</p>';
   }
 }
 
